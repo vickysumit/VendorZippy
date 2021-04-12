@@ -14,18 +14,20 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
 const { width: WIDTH } = Dimensions.get("window");
 
-
-
-
-
 function Login(props) {
   const [username, onChangeUsername] = useState('');
 const [password, onChangePass] = useState('');
 const [isAuthenticated, onChangeauth] = useState(false);
 var url = 'http://localhost:3000/users/login';
+
 function handleLogin(){
-  
- return fetch('http://localhost:3001/users/login', {
+if(username=='' || password=='')
+{
+  Alert.alert("Please provide both username and password");
+}
+
+else{
+  fetch('http://192.168.43.241:3000/users/login', {
     method: 'POST',
     headers: { 
         'Content-Type':'application/json' 
@@ -48,8 +50,8 @@ function handleLogin(){
 .then(response => {
     if (response.success) {
         // If login was successful, set the token in local storage
-        localStorage.setItem('token', response.token);
-   
+        
+        console.log('nicely',response)
     }
     else {
         var error = new Error('Error ' + response.status);
@@ -60,16 +62,16 @@ function handleLogin(){
 .catch(error => {console.log(error.message)})
 }
 
+
+}
+
   return (
     <ImageBackground
       source={require("../images/foodbg.jpg")}
       style={styles.backgroundContainer}
     >
       <View style={styles.logoContainer}>
-        <Image
-          source={require("../images/logo.png")}
-          style={styles.Logo}
-        ></Image>
+       
         <Text style={styles.logoText}>Zippy</Text>
       </View>
       <View style={styles.inputContainer}>
@@ -94,16 +96,19 @@ function handleLogin(){
           underlineColorAndroid="transparent"
           onChangeText={text => onChangePass(text)}
         />
-        <Button
+        
+      </View>
+      <View style={{margin:30}}>
+      <Button
+        
         title="Login"
-        color="#f194ff"
+        color="red"
         onPress={() => handleLogin()} 
+        
         />
       </View>
-      <TouchableOpacity style={styles.btnEye}>
-        <Icon name={'ios-eye-outline'} size={26} color={'white'} 
-          />
-      </TouchableOpacity>
+     
+      
     </ImageBackground>
   );
 }
@@ -140,6 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.35 )",
     color: "rgba(255,255,255,0.7)",
     marginHorizontal: 25,
+    marginBottom:10
   },
   inputIcon: {
     position: "absolute",
