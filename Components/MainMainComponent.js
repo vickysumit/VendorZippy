@@ -8,6 +8,8 @@ import {View, ActivityIndicator ,Text} from 'react-native';
 import { registerUser } from "../redux/ActionCreators";
 import S2 from "./s2";
 import Tabs from "../navigation/tabs";
+import FlatList from "./FlatList";
+import SignInScreenDeba from "./prac";
 import Dashboard from "./Dashboard";
 const mapStateToProps = state => {
     return {
@@ -65,7 +67,7 @@ class MainMain extends Component{
             return(
                 
                 
-                <Tabs />
+                <FlatList />
             
             )
 
@@ -74,7 +76,7 @@ class MainMain extends Component{
             
            return(
             
-                <S2 />    
+                <SignInScreenDeba />    
         )
            }
             

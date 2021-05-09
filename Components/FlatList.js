@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { FlatList,View,Text } from "react-native";
+import { FlatList,View,Text,Button } from "react-native";
 import { Card } from "react-native-elements";
-import { fetchVendorList } from "../redux/ActionCreators";
+import { fetchVendorList ,signOut} from "../redux/ActionCreators";
 import { connect } from "react-redux";
 import { Component } from 'react';
 import { baseUrl } from "../shared/baseUrl";
@@ -11,7 +11,8 @@ import { Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const mapStateToProps = state => {
     return {
-      vendorlist: state.vendorlist
+      vendorlist: state.vendorlist,
+      auth: state.auth
     }
   }
 
@@ -19,7 +20,8 @@ const mapStateToProps = state => {
   const mapDispatchToProps = (dispatch) => ({
     loginUser: (creds) => dispatch(loginUser(creds)),
     registerUser:(userToken) => dispatch(registerUser(userToken)),
-    fetchVendorList:() => dispatch(fetchVendorList())
+    fetchVendorList:() => dispatch(fetchVendorList()),
+    signOut:()=>dispatch(signOut())
 })
 
 
@@ -46,6 +48,7 @@ class FlatListPage extends Component
         super(props);
         
         this.handleClick = this.handleClick.bind(this); 
+        this.handleLogout = this.handleLogout.bind(this);
     }
     componentDidMount(){
         setTimeout( ()=>{
@@ -58,12 +61,16 @@ class FlatListPage extends Component
     handleClick(){
         Alert.alert('hello');
     }
+    handleLogout(){
+      this.props.signOut();
+  }
     render(){
       
         console.log(DATA);
 
         const renderItem = ({item}) => {
             return(
+    
          <TouchableOpacity key={item._id} onPress={() => {
             this.props.navigation.navigate('Afterflatlist', {
               vendorId: item._id,
@@ -96,12 +103,19 @@ class FlatListPage extends Component
         }
         else{
             return(
+              <View>
+                <Button
+                title='LOGOUT'
+                onPress={()=>this.handleLogout()}
+                />
                 <FlatList
                     data={this.props.vendorlist.vendors}
                     renderItem={renderItem}
                     keyExtractor={item => item._id.toString()}
         
                 />
+              </View>
+                
             )
         }
 

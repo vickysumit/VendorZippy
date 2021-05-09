@@ -18,6 +18,9 @@ import Slip from "./Components/Slip";
 import FlatListPage from "./Components/FlatList";
 import AddButton from "./Components/AddButton";
 import SplashScreen2 from "./Components/SplashScreen2";
+import Profile from "./Components/ProfileComponent";
+import SignInScreenDeba from "./Components/prac";
+import GmailSignup from "./Components/GmailSignupComponent";
 
 import FoodItems from "./Components/Vivek";
 

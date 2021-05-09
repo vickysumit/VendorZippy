@@ -1,7 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import * as SecureStore from 'expo-secure-store'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 export const requestLogin = (creds) => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
@@ -22,6 +21,8 @@ export const loginError = (message) => {
         message
     }
 }
+
+
 
 
 export const loginUser = (creds) => (dispatch) => {
@@ -74,15 +75,52 @@ export const loginUser = (creds) => (dispatch) => {
 export const signIn = (username,password) => async(dispatch) => {
     let userToken;
     userToken= null;
-    if(username=='sumit' && password=='123')
-    {
-        userToken='abab';
-        try{
-            await AsyncStorage.setItem('userToken',userToken)
-        }catch(e){console.log(e)}
+
+    fetch('http://192.168.43.241:3000/users/login', {
+        method: 'POST',
+        headers: { 
+            'Content-Type':'application/json' 
+        },
+        body: JSON.stringify({username,password})
+    })
+    .then(response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+        },
+        error => {
+            throw error;
+        })
+    .then(response => response.json())
+    .then(async(response) => {
+        if (response.success) {
+           
+            userToken=response.token;
+            try{
+                await AsyncStorage.setItem('userToken',userToken)
+            }catch(e){console.log(e)}
+            dispatch({type:'LOGIN',id:username,token:userToken})
+        }
+        else {
+            var error = new Error('Error ' + response.status);
+            error.response = response;
+            throw error;
+        }
+    })
+    .catch(error =>console.log(error.message))
+    // if(username=='sumit' && password=='123')
+    // {
+    //     userToken='abab';
+    //     try{
+    //         await AsyncStorage.setItem('userToken',userToken)
+    //     }catch(e){console.log(e)}
         
-    }
-    dispatch({type:'LOGIN',id:username,token:userToken})
+    // }
+    // dispatch({type:'LOGIN',id:username,token:userToken})
     
 }
 
@@ -208,6 +246,7 @@ export const markActive = (id) => (dispatch) => {
 }
 
 export const addToCart = (product)=>(dispatch)=>{
+    console.log(product);
     dispatch(addtocartFunction(product));
 }
 
@@ -217,3 +256,69 @@ export const addtocartFunction = (product) => ({
     payload: product
 });
 
+
+export const gmailVerifyRequest  = (mail) => (dispatch) => {
+    
+    console.log(mail);
+    
+    return fetch('http://192.168.43.241:3000/gmail/signup' , {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({
+            email: mail
+          })
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('done')
+                return response;
+            }
+            else {
+                console.log('not done')
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .catch(error => {console.log(error)});
+}
+
+export const isVerified = () => ({
+    type: ActionTypes.REQUEST_MAIL_VERIFY
+});
+
+export const otp  = () => (dispatch) => {
+    
+
+    return fetch('http://192.168.43.241:3000/gmail/random' , {
+        method: 'POST',
+        
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('done')
+                return response;
+            }
+            else {
+                console.log('not done')
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then((response)=>{console.log(response);global.random_num=response.rnum ;})
+        .catch(error => {{console.log(error)}});
+}

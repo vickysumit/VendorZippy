@@ -1,33 +1,24 @@
 import * as ActionTypes from './ActionTypes';
 import CartItem from "../model/cart_item";
-export const CartList = (state = {
-        item: {},
-        totalAmount: 0
-    }, action) => {
+export const CartList = (state = [], action) => {
     switch(action.type) {
         case ActionTypes.ADD_TO_CART:
-            const addedProduct = action.payload;
-            const productName = addedProduct.itemname;
-
-            if(state.item[addedProduct._id]){
-                const updatedCartItem = new CartItem(
-                    state.item[addedProduct._id].quantity + 1,
-                    productName
-                )
-
-                return{
-                    ...state,
-                    item:{...state.item,[addedProduct._id]:newCartItem}
-                }
+            if(state.some((item)=>item._id==action.payload._id))
+            {
+                var f= state.find((item)=>item._id== action.payload._id);
+                f["quantity"]= f["quantity"] + 1;
+                // var arr = state.filter((item=>item._id==action.payload._id))
+                // arr.push({"quantity":"1"})
+                // return {state:{state,[action.payload._id]:arr}};
+                return state;
             }
+             else{
+                var  f1 = action.payload;
+                f1["quantity"]=1
+                return[...state,f1] 
+             }
             
-            else{
-                const newCartItem = new CartItem(1,productName);
-                return{
-                    ...state,
-                    item:{...state.item,[addedProduct._id]:newCartItem}
-                }
-            }
+                   
         default:
             return state;
     }

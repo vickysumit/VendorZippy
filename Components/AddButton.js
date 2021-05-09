@@ -2,17 +2,36 @@ import * as React from 'react';
 import { Text, View, StyleSheet,Pressable,Alert } from 'react-native';
 import Constants from 'expo-constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { fetchVendorList,addToCart } from "../redux/ActionCreators";
+import { connect } from "react-redux";
 
-export default function AddButton() {
-  var [state,setState] = React.useState(0);
 
-function handlePress(){
-setState(state + 1);
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  registerUser:(userToken) => dispatch(registerUser(userToken)),
+  fetchVendorList:() => dispatch(fetchVendorList()),
+  addToCart:(product)=>dispatch(addToCart(product))
+})
+
+const mapStateToProps = state => {
+  return {
+    vendorlist: state.vendorlist,
+    cartlist:state.cartlist
+  }
 }
 
-function add(){
+ function AddButton(props) {
+  var [state,setState] = React.useState(0);
+
+function handlePress(item){
+setState(state + 1);
+
+}
+
+function add(item){
  
   setState(state + 1);
+  
 }
 
 function minus(){
@@ -55,7 +74,7 @@ function minus(){
 }
 
 
-
+export default connect(mapStateToProps,mapDispatchToProps)(AddButton)
 const styles = StyleSheet.create({
   container: {
     flex: 1,

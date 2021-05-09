@@ -27,7 +27,7 @@ function E2(props){
             <Text>Welcome Home</Text>
             <Button
                 title='LOGOUT'
-                onPress={()=>handleLogout()}
+                onPress={()=>this.handleLogout()}
             />
         </View>
     )

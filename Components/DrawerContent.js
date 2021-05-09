@@ -40,7 +40,7 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Your Order"
+                            label="Home"
                             onPress={() => {props.navigation.navigate('Home')}}
                         />
                         <DrawerItem 
@@ -52,8 +52,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('Profile')}}
+                            label="Slip"
+                            onPress={() => {props.navigation.navigate('Slip')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
