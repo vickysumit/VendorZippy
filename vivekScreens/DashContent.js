@@ -3,28 +3,12 @@ import { View,StyleSheet,Image } from "react-native";
 import { DrawerContentScrollView,DrawerItem } from "@react-navigation/drawer";
 import { Avatar,Title,Caption,Paragraph,Drawer,Text,TouchableRipple,Switch } from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { connect } from "react-redux";
-import { signOut } from "../redux/ActionCreators";
-
-const mapStateToProps = state => {
-    return {
-      vendorlist: state.vendorlist,
-      auth: state.auth
-    }
-  }
-
-  const mapDispatchToProps = (dispatch) => ({
-    signOut:()=>dispatch(signOut())
-})
 
 function DrawerContent(props){
 
     const [isDarkTheme,setDarkTheme] = React.useState(false);
     const toggleTheme = ()=>{
         setDarkTheme(!isDarkTheme)
-    }
-    function handleLogout(){
-        props.signOut();
     }
     return(
         <View style={{flex:1}}>
@@ -56,7 +40,7 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Home"
+                            label="Your Order"
                             onPress={() => {props.navigation.navigate('Home')}}
                         />
                         <DrawerItem 
@@ -68,8 +52,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Bank"
-                            onPress={() => {props.navigation.navigate('bank')}}
+                            label="Profile"
+                            onPress={() => {props.navigation.navigate('Profile')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -79,8 +63,8 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('profile')}}
+                            label="Favorite Items"
+                            onPress={() => {props.navigation.navigate('BookmarkScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -91,8 +75,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Account Details"
-                            onPress={() => {props.navigation.navigate('account')}}
+                            label="Send Feedback"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                          <DrawerItem 
                             icon={({color, size}) => (
@@ -103,8 +87,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="FAQ"
-                            onPress={() => {props.navigation.navigate('faq')}}
+                            label="Rate us"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -115,8 +99,8 @@ function DrawerContent(props){
                                 type ={'feather'}
                                 />
                             )}
-                            label="Bank Details"
-                            onPress={() => {props.navigation.navigate('bank')}}
+                            label="Settings"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -126,8 +110,8 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="About Us"
-                            onPress={() => {props.navigation.navigate('aboutus')}}
+                            label="Support"
+                            onPress={() => {props.navigation.navigate('SupportScreen')}}
                         />
                          <DrawerItem 
                             icon={({color, size}) => (
@@ -137,8 +121,8 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="Contact Us"
-                            onPress={() => {props.navigation.navigate('contactus')}}
+                            label="About Us"
+                            onPress={() => {props.navigation.navigate('SupportScreen')}}
                         />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">
@@ -163,7 +147,7 @@ function DrawerContent(props){
                             />
                         )}
                         label="Sign Out"
-                        onPress={()=>handleLogout()}
+                        onPress={() => {signOut()}}
                     />
 
                 </Drawer.Section>
@@ -218,4 +202,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent);
+export default DrawerContent;

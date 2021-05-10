@@ -23,6 +23,14 @@ import AfterFlat from "./AfterFlatlist";
 import CardComponent from "./CartComponent";
 import SignInScreenDeba from "./prac";
 import Slip from "./Slip";
+import VAboutUs from "../vivekComponent/AboutUs";
+import VAccount from "../vivekComponent/Account";
+import VBankdetails from "../vivekComponent/BankDetails";
+import VContactus from "../vivekComponent/ContactUs";
+import VFaq from "../vivekComponent/Faq";
+import VProfile from "../vivekComponent/Profile";
+import VHome from "../vivekScreens/HomeScreen";
+
 const mapStateToProps = state => {
     return {
       auth: state.auth
@@ -34,10 +42,10 @@ const mapStateToProps = state => {
     registerUser:(userToken) => dispatch(registerUser(userToken)),
 })
 
-const MenuNavigator = ({navigation}) => {
+const HomeNavigator = ({navigation}) => {
     const Stack = createStackNavigator();
     return(
-      <Stack.Navigator initialRouteName="FlatlistCompo" screenOptions={{
+      <Stack.Navigator initialRouteName="VHome" screenOptions={{
         title: 'Home',
         headerLeft: () => (
           <Icon name="menu" size={24} 
@@ -52,18 +60,86 @@ const MenuNavigator = ({navigation}) => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="FlatlistCompo" component={FlatListCompo} />
-      <Stack.Screen name="Afterflatlist" component={AfterFlat} />
+      <Stack.Screen name="VHome" component={VHome} />
       </Stack.Navigator>
     )
   }
 
-  const SlipNavigator = ({navigation})=>{
+  const AboutUsNavigator = ({navigation})=>{
     const Stack = createStackNavigator();
     return(
       <Stack.Navigator >
-            <Stack.Screen name="Slip" component={Slip}  options={{
-        title: 'Slip',
+            <Stack.Screen name="aboutus" component={VAboutUs}  options={{
+        title: 'About Us',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
+
+  const ContactUsNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="contactus" component={VContactus}  options={{
+        title: 'Contact Us',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
+
+  const ProfileNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="profile" component={VProfile}  options={{
+        title: 'Profile',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
+
+  const FaqNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="faq" component={VFaq}  options={{
+        title: 'FAQ',
         headerLeft: () => (
           <Icon name="menu" size={24} 
             color= 'white'
@@ -81,6 +157,51 @@ const MenuNavigator = ({navigation}) => {
     )
   }
   
+  const AccountNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="account" component={VAccount}  options={{
+        title: 'Account',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
+
+  const BankNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="bank" component={VBankdetails}  options={{
+        title: 'Bank Details',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
 
   
 class Main extends Component {
@@ -124,8 +245,14 @@ class Main extends Component {
                 
                 <NavigationContainer>
                 <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
-                  <Drawer.Screen name="Home" component={MenuNavigator} />
-                  <Drawer.Screen name="Slip" component={SlipNavigator} />
+                  <Drawer.Screen name="Home" component={HomeNavigator} />
+                  <Drawer.Screen name="bank" component={BankNavigator} />
+                  <Drawer.Screen name="profile" component={ProfileNavigator} />
+                  <Drawer.Screen name="account" component={AccountNavigator} />
+                  <Drawer.Screen name="faq" component={FaqNavigator} />
+                  
+                  <Drawer.Screen name="aboutus" component={AboutUsNavigator} />
+                  <Drawer.Screen name="contactus" component={ContactUsNavigator} />
                 </Drawer.Navigator>
               </NavigationContainer>
             

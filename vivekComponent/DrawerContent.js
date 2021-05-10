@@ -3,19 +3,6 @@ import { View,StyleSheet,Image } from "react-native";
 import { DrawerContentScrollView,DrawerItem } from "@react-navigation/drawer";
 import { Avatar,Title,Caption,Paragraph,Drawer,Text,TouchableRipple,Switch } from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { connect } from "react-redux";
-import { signOut } from "../redux/ActionCreators";
-
-const mapStateToProps = state => {
-    return {
-      vendorlist: state.vendorlist,
-      auth: state.auth
-    }
-  }
-
-  const mapDispatchToProps = (dispatch) => ({
-    signOut:()=>dispatch(signOut())
-})
 
 function DrawerContent(props){
 
@@ -23,9 +10,33 @@ function DrawerContent(props){
     const toggleTheme = ()=>{
         setDarkTheme(!isDarkTheme)
     }
-    function handleLogout(){
-        props.signOut();
+    const vendorNewNavigator = ()=>{
+        const stack = createStackNavigator();
+        return(
+            <NavigationContainer>
+                <Stack.Navigator 
+                screenOptions={{
+                  title: 'ZIPPY',
+                  headerLeft: () => (
+                    <Icon name="reorder" size={24} 
+                      color= 'white'
+                      onPress={ () => navigation.toggleDrawer() } />
+                  ),
+                  headerStyle: {
+                    backgroundColor: '#f4511e',
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+                >
+                    <Screen.stack name="vendornew" component={VendorNew} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
     }
+    
     return(
         <View style={{flex:1}}>
                     <DrawerContentScrollView {...props}>
@@ -39,26 +50,15 @@ function DrawerContent(props){
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>User Name</Title>
-                                <Caption style={styles.caption}>user@gmail.com</Caption>
+                                <Title style={styles.title}>Vivek Dhiman</Title>
+                                <Caption style={styles.caption}>vivek.dhiman@gmail.com</Caption>
                             </View>
                             
                         </View>
                        
                         </View>
                         <Drawer.Section style={styles.drawerSection}>
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                                <Icon 
-                                name="list" 
-                                color={color}
-                                size={size}
-                                
-                                />
-                            )}
-                            label="Home"
-                            onPress={() => {props.navigation.navigate('Home')}}
-                        />
+                        
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -68,8 +68,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Bank"
-                            onPress={() => {props.navigation.navigate('bank')}}
+                            label="Profile"
+                            onPress={() => {props.navigation.navigate('Profile')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -79,8 +79,8 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('profile')}}
+                            label="Past Orders"
+                            onPress={() => {props.navigation.navigate('History')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -91,8 +91,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Account Details"
-                            onPress={() => {props.navigation.navigate('account')}}
+                            label="Suggestions"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                          <DrawerItem 
                             icon={({color, size}) => (
@@ -103,8 +103,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="FAQ"
-                            onPress={() => {props.navigation.navigate('faq')}}
+                            label="My overall rating"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -115,8 +115,8 @@ function DrawerContent(props){
                                 type ={'feather'}
                                 />
                             )}
-                            label="Bank Details"
-                            onPress={() => {props.navigation.navigate('bank')}}
+                            label="Settings"
+                            onPress={() => {props.navigation.navigate('SettingsScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -126,8 +126,8 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="About Us"
-                            onPress={() => {props.navigation.navigate('aboutus')}}
+                            label="Support"
+                            onPress={() => {props.navigation.navigate('SupportScreen')}}
                         />
                          <DrawerItem 
                             icon={({color, size}) => (
@@ -137,9 +137,10 @@ function DrawerContent(props){
                                 size={size}
                                 />
                             )}
-                            label="Contact Us"
-                            onPress={() => {props.navigation.navigate('contactus')}}
+                            label="About Us"
+                            onPress={() => {props.navigation.navigate('SupportScreen')}}
                         />
+                       
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">
                         <TouchableRipple onPress={() => {toggleTheme()}}>
@@ -163,7 +164,7 @@ function DrawerContent(props){
                             />
                         )}
                         label="Sign Out"
-                        onPress={()=>handleLogout()}
+                        onPress={() => {signOut()}}
                     />
 
                 </Drawer.Section>
@@ -218,4 +219,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent);
+export default DrawerContent;
