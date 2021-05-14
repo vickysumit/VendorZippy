@@ -3,7 +3,7 @@ import { Text, View ,ActivityIndicator,FlatList,Switch} from 'react-native';
 import {DISHES2}  from "./dishes2";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Card } from "react-native-elements";
-
+import Vivek from "../Components/Vivek";
 
 function FoodItems() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -69,7 +69,7 @@ function DetailsScreen(props) {
     >
       <Tab.Screen
         name="FoodItems"
-        component={FoodItems}
+        component={Vivek}
         options={{ tabBarLabel: 'FoodItems' }}
       />
       <Tab.Screen

@@ -91,8 +91,8 @@ function DrawerContent(props){
                                 
                                 />
                             )}
-                            label="Account Details"
-                            onPress={() => {props.navigation.navigate('account')}}
+                            label="Rating"
+                            onPress={() => {props.navigation.navigate('rating')}}
                         />
                          <DrawerItem 
                             icon={({color, size}) => (
@@ -115,8 +115,8 @@ function DrawerContent(props){
                                 type ={'feather'}
                                 />
                             )}
-                            label="Bank Details"
-                            onPress={() => {props.navigation.navigate('bank')}}
+                            label="Settings"
+                            onPress={() => {props.navigation.navigate('setting')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -139,6 +139,17 @@ function DrawerContent(props){
                             )}
                             label="Contact Us"
                             onPress={() => {props.navigation.navigate('contactus')}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="comments" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Suggestions"
+                            onPress={() => {props.navigation.navigate('suggest')}}
                         />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">

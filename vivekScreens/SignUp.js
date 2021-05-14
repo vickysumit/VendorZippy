@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Text, ScrollView, Image} from 'react-native';
 
-import Input from '../Components/Inputs';
-import Submit from '../Components/Submit';
+import Input from '../vivekComponent/Inputs';
+import Submit from '../vivekComponent/Submit';
 
 const SignUp = props => {
     return (

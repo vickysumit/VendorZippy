@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { Button } from 'react-native';
 import { View,TouchableOpacity,Text, TextInput,ScrollView} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 class VendorNew extends Component{
     
+    constructor(props) {
+      super(props);
+    }
     render(){
 
         
@@ -347,7 +351,12 @@ class VendorNew extends Component{
                         marginTop:20
                     }}>
                       <Icon color='red' name="logout" size={18} />  
-                      <Text color='#fff'>  Submit</Text>
+                      
+                      <Button
+                      title="Submit"
+                      
+                      onPress={()=>this.props.navigation.navigate("Home")}
+                      />
                     </View>
 
 

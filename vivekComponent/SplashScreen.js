@@ -44,7 +44,7 @@ class SplashScreen extends React.Component{
             <Text style={styles.title}>Stay connected with Zippy for better experience!</Text>
             <Text style={styles.text}>🏃‍♂️🏃‍♂️ Chase the Flavour Today !!</Text>
             <View style={styles.button}>
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')}>
+            <TouchableOpacity onPress={()=>this.props.navigation.navigate('SignInScreenDeba')}>
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
                     style={styles.signIn}

@@ -30,7 +30,15 @@ import VContactus from "../vivekComponent/ContactUs";
 import VFaq from "../vivekComponent/Faq";
 import VProfile from "../vivekComponent/Profile";
 import VHome from "../vivekScreens/HomeScreen";
-
+import MT from "../vivekScreens/MainTabScreen";
+import Vsignup from "../vivekScreens/SignUp";
+import Vsplash from "../vivekComponent/SplashScreen";
+import Settings from "../vivekComponent/SettingScreen";
+import VvenderNew from "../vivekComponent/VendorNew";
+import Rating from "../vivekComponent/overAllrating";
+import Discount from "../vivekComponent/Discount";
+import Pdiscount from "../vivekComponent/PerDiscount";
+import Suggest from "../vivekComponent/Suggestion";
 const mapStateToProps = state => {
     return {
       auth: state.auth
@@ -60,7 +68,29 @@ const HomeNavigator = ({navigation}) => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="VHome" component={VHome} />
+      <Stack.Screen name="VHome" component={MT} />
+      </Stack.Navigator>
+    )
+  }
+  const SettingNavigator = ({navigation}) => {
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator initialRouteName="setting" screenOptions={{
+        title: 'Settings',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+      <Stack.Screen name="setting" component={Settings} />
       </Stack.Navigator>
     )
   }
@@ -157,12 +187,12 @@ const HomeNavigator = ({navigation}) => {
     )
   }
   
-  const AccountNavigator = ({navigation})=>{
+  const RatingNavigator = ({navigation})=>{
     const Stack = createStackNavigator();
     return(
       <Stack.Navigator >
-            <Stack.Screen name="account" component={VAccount}  options={{
-        title: 'Account',
+            <Stack.Screen name="rating" component={Rating}  options={{
+        title: 'Rating',
         headerLeft: () => (
           <Icon name="menu" size={24} 
             color= 'white'
@@ -186,6 +216,28 @@ const HomeNavigator = ({navigation}) => {
       <Stack.Navigator >
             <Stack.Screen name="bank" component={VBankdetails}  options={{
         title: 'Bank Details',
+        headerLeft: () => (
+          <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }} />
+      </Stack.Navigator>
+    )
+  }
+  const SuggestNavigator = ({navigation})=>{
+    const Stack = createStackNavigator();
+    return(
+      <Stack.Navigator >
+            <Stack.Screen name="suggest" component={Suggest}  options={{
+        title: 'Suggestions',
         headerLeft: () => (
           <Icon name="menu" size={24} 
             color= 'white'
@@ -244,15 +296,18 @@ class Main extends Component {
                 
                 
                 <NavigationContainer>
-                <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
+                <Drawer.Navigator initialRouteName="Vvendornew" drawerContent={props => <DrawerContent {...props} />}>
+                <Drawer.Screen name="Vvendornew" component={VvenderNew} />
                   <Drawer.Screen name="Home" component={HomeNavigator} />
                   <Drawer.Screen name="bank" component={BankNavigator} />
                   <Drawer.Screen name="profile" component={ProfileNavigator} />
-                  <Drawer.Screen name="account" component={AccountNavigator} />
+                  <Drawer.Screen name="rating" component={RatingNavigator} />
                   <Drawer.Screen name="faq" component={FaqNavigator} />
-                  
+                  <Drawer.Screen name="setting" component={SettingNavigator} />
+                  <Drawer.Screen name="suggest" component={SuggestNavigator} />
                   <Drawer.Screen name="aboutus" component={AboutUsNavigator} />
                   <Drawer.Screen name="contactus" component={ContactUsNavigator} />
+                  
                 </Drawer.Navigator>
               </NavigationContainer>
             
@@ -264,8 +319,9 @@ class Main extends Component {
             return(
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName={Onboarding}>
+                    <Stack.Screen name="VSplash" component={Vsplash} options={{headerShown:false}} />
                     <Stack.Screen name="SignInScreenDeba" component={SignInScreenDeba} options={{headerShown:false}} />
- 
+                    <Stack.Screen name="VSignUpScreen" component={Vsignup} options={{headerShown:false}} />
                     <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} />
                     
 

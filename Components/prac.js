@@ -111,7 +111,7 @@ const SignInScreenDeba = (props) => {
         // const foundUser = Users.filter( item => {
         //     return userName == item.username && password == item.password;
         // } );
-
+        
         if ( data.username.length == 0 || data.password.length == 0 ) {
             Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
                 {text: 'Okay'}
@@ -119,6 +119,7 @@ const SignInScreenDeba = (props) => {
             return;
         }
         else{
+            Alert.alert("hello");
             props.signIn(data.username,password);
         }
 
@@ -245,7 +246,7 @@ const SignInScreenDeba = (props) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('SignUpScreen')}
+                    onPress={() => props.navigation.navigate('VSignUpScreen')}
                     style={[styles.signIn, {
                         borderColor: '#009387',
                         borderWidth: 1,

@@ -9,7 +9,8 @@ import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
 import ProfileScreen from './ProfileScreen';
-
+import Discount from "../vivekComponent/Discount";
+import Pdiscount from "../vivekComponent/PerDiscount";
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -45,10 +46,10 @@ const MainTabScreen = () => (
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileStackScreen}
+        name="Discount"
+        component={DiscountStackScreen}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'Discount',
           tabBarColor: '#694fad',
           tabBarIcon: ({ color }) => (
             <AntDesign name="user" color={color} size={26} />
@@ -56,10 +57,10 @@ const MainTabScreen = () => (
         }}
       />
       <Tab.Screen
-        name="Explore"
+        name="New Order"
         component={ExploreStackScreen}
         options={{
-          tabBarLabel: 'Explore',
+          tabBarLabel: 'New Order',
           tabBarColor: '#d02860',
           tabBarIcon: ({ color }) => (
             <AntDesign name="setting" color={color} size={26} />
@@ -108,7 +109,7 @@ const DetailsStackScreen = ({navigation}) => (
 </DetailsStack.Navigator>
 );
 
-const ProfileStackScreen = ({navigation}) => (
+const DiscountStackScreen = ({navigation}) => (
     <ProfileStack.Navigator screenOptions={{
             headerStyle: {
             backgroundColor: '#694fad',
@@ -118,12 +119,13 @@ const ProfileStackScreen = ({navigation}) => (
             fontWeight: 'bold'
             }
         }}>
-            <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{
-            title:'Profile',
+            <ProfileStack.Screen name="Discount" component={Pdiscount} options={{
+            title:'Discount',
             headerLeft: () => (
                 <AntDesign.Button name="menu-fold" size={25} backgroundColor="694fad" onPress={() => navigation.openDrawer()}></AntDesign.Button>
             )
             }} />
+            
     </ProfileStack.Navigator>
     );
     
