@@ -4,7 +4,8 @@ import {DISHES2}  from "./dishes2";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Card } from "react-native-elements";
 import Vivek from "../Components/Vivek";
-
+import CategoryNew from "../vivekComponent/Category";
+import ItemAdd from "../vivekComponent/ItemAdd";
 function FoodItems() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -74,12 +75,12 @@ function DetailsScreen(props) {
       />
       <Tab.Screen
         name="Category"
-        component={Category}
+        component={CategoryNew}
         options={{ tabBarLabel: 'Category' }}
       />
       <Tab.Screen
         name="SubCategory"
-        component={ SubCategory}
+        component={ ItemAdd}
         options={{ tabBarLabel: ' SubCategory' }}
       />
     </Tab.Navigator>
